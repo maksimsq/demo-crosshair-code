@@ -17,9 +17,8 @@ jobs:
 
       # Using the demoparser2 dependency via NPM causes some issues, just submodule it and local build instead
       - name: Build demoparser
-        env:
-          PROTOC: ${GITHUB_WORKSPACE}/scripts
         run: |
+          apt-get -y install protobuf-compiler
           cargo install wasm-pack
           cd submodules/demoparser2/src/wasm
           wasm-pack build --out-dir www/pkg --target no-modules
