@@ -22,6 +22,8 @@ jobs:
           cargo install wasm-pack
           cd submodules/demoparser2/src/wasm
           wasm-pack build --out-dir www/pkg --target no-modules
+          cd ../../../../
+          node ./scripts/fix.js
 
       - name: Build website
         run: |
