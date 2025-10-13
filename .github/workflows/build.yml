@@ -18,11 +18,10 @@ jobs:
       # Using the demoparser2 dependency via NPM causes some issues, just submodule it and local build instead
       - name: Build demoparser
         run: |
+          echo "${GITHUB_WORKSPACE}/scripts" >> $GITHUB_PATH
           cargo install wasm-pack
           cd submodules/demoparser2/src/wasm
           wasm-pack build --out-dir www/pkg --target no-modules
-          cd ../../../../
-          node ./scripts/fix.js
 
       - name: Build website
         run: |

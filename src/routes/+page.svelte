@@ -27,7 +27,8 @@
 		).href;
 
 		import(/* @vite-ignore */ demoparser2url)
-			.then(async () => {
+			.then(async ({ wasm_bindgen }) => {
+				window.wasm_bindgen = wasm_bindgen;
 				await window.wasm_bindgen(demoparser2url.replace(".js", "_bg.wasm"));
 			})
 			.catch((err: Error) => {
