@@ -22,14 +22,16 @@
 			prefix += "/";
 		}
 		const demoparser2url = new URL(
-			`${prefix}_app/immutable/assets/demoparser2/demoparser2.js`,
+			`${prefix}_app/immutable/assets/demoparser2/demoparser2.js?t=${Date.now()}`,
 			$page.url
 		).href;
 
 		import(/* @vite-ignore */ demoparser2url)
 			.then(async ({ wasm_bindgen }) => {
 				window.wasm_bindgen = wasm_bindgen;
-				await window.wasm_bindgen(demoparser2url.replace(".js", "_bg.wasm"));
+				await window.wasm_bindgen(
+					demoparser2url.split("?")[0].replace(".js", "_bg.wasm") + `?t=${Date.now()}`
+				);
 			})
 			.catch((err: Error) => {
 				showError(err, true);
